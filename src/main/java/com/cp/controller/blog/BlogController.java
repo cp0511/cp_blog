@@ -24,6 +24,7 @@ public class BlogController {
     @Autowired
     private IBlogService blogService;
 
+
     @GetMapping("/blog/query")
     @ResponseBody
     public ServerResponse queryBlog(@RequestParam(value = "pageNo",defaultValue = "1")int pageNo,

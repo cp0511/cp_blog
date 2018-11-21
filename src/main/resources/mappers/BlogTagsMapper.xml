@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cp.mapper.BlogTagsMapper" >
+  
+ 	 <resultMap id="BaseResultMap" type="com.cp.pojo.BlogTags" >
+	      <result property="tagId" column="tag_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+	      <result property="tagName" column="tag_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+	      <result property="createTime" column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+	      <result property="isDelete" column="is_delete" jdbcType="INTEGER" javaType="java.lang.Integer" />
+  	</resultMap>
+  
+  	<sql id="Base_Column_List">
+  		tag_id,tag_name,create_time,is_delete
+  	</sql>
+  	
+  	<select id="queryBlogTagsAll" resultMap="BaseResultMap" parameterType="com.cp.vo.BlogTagsVo">
+  		SELECT
+			<include refid="Base_Column_List"></include>
+		FROM
+			blog_tags
+		<where>
+			 <if test="tagId!=null"> and tag_id = #{tagId,jdbcType=INTEGER}</if>
+			 <if test="tagName!=null and tag_name!=''"> and tag_name = #{tagName,jdbcType=VARCHAR}</if>
+			 <if test="createTime!=null"> and create_time = now()</if>
+			 <if test="isDelete!=null"> and is_delete = #{isDelete,jdbcType=INTEGER}</if>
+		</where>	
+  	</select>
+  
+  	<select id="getBlogTagsById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  		SELECT
+			<include refid="Base_Column_List"></include>
+		FROM
+			blog_tags
+		WHERE
+			id = #{id,jdbcType=INTEGER}
+  	</select>
+  	
+  	<insert id="saveBlogTags" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+  		insert into blog_tags (tag_id,tag_name,create_time,is_delete)values(#{tagId,jdbcType=INTEGER},#{tagName,jdbcType=VARCHAR},now(),#{isDelete,jdbcType=INTEGER})
+  	</insert>
+  	
+  	<update id="updateBlogTags" parameterType="com.cp.pojo.BlogTags" flushCache="true">
+  		update blog_tags 
+  		<set>
+			<if test="tagId!=null">tag_id = #{tagId,jdbcType=INTEGER},</if>
+			<if test="tagName!=null and tagName!=''">tag_name = #{tagName,jdbcType=VARCHAR},</if>
+			<if test="createTime!=null">create_time = now(),</if>
+			<if test="isDelete!=null">is_delete = #{isDelete,jdbcType=INTEGER},</if>
+  		</set>
+  		where id = #{id ,jdbcType=INTEGER}
+  	</update>
+  	
+  	<delete id="deleteBlogTagsById" flushCache="true">
+  		delete from blog_tags where id = #{id,jdbcType=INTEGER}
+  	</delete>
+  	
+ </mapper>	

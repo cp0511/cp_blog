@@ -24,6 +24,7 @@ public class IndexController {
 //        model.addAttribute("pageInfo",serverResponse);
 //        return "blog/index";
 //    }
+
     @GetMapping("/index")
     public String blogquery() {
         return "blog/index";

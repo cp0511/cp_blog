@@ -35,9 +35,9 @@ public class ProjectAutoUtil2 {
 
 	
 	//实体名
-	private static	String beanModel = "Blog";
+	private static	String beanModel = "BlogTags";
 	//表名
-	private static	String tablename = "blog";
+	private static	String tablename = "blog_tags";
 	private static	String model = beanModel.toLowerCase();
 	private static String author = "程程有小棉被啊";
 	private static String description = "描述";
@@ -108,7 +108,7 @@ public class ProjectAutoUtil2 {
 			root.put("author", author); 
 			root.put("beanModel", beanModel); 
 			root.put("model", model); 
-			root.put("phone", phone); 
+			root.put("phone", phone);
 			root.put("package","com.cp");
 			root.put("basePath", "${basePath}"); 
 			root.put("datetime", datetime);

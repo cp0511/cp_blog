@@ -36,7 +36,7 @@ var vue = new Vue({
         load: function () {
             var params = {pageNo:this.$data.pageNum,pageSize:this.$data.pageSize}
             this.$http.get("http://localhost:8080/blog/query",{params:params}).then(function (response) {
-                console.log(response)
+                //console.log(response)
                 var serverResponse = response.body;
                 var pageInfo = serverResponse.data;
                 this.$data.blogs = pageInfo.list;//将后台返回的数据返回给VUE数据包，数据包会发生改变，并将数据进行渲染
@@ -51,6 +51,42 @@ var vue = new Vue({
 });
 
 
+var tagVue = new Vue({
+    el:"#myTags",
+    data:{
+        mytags:[]
+    },
+    created: function () { // vue 组件加载完成后执行的函数
+        this.load();
+    },
+    computed: {
+        //计算属性
+        total: function () {
+            return "100";
+        }
+
+    },
+    methods: {//绑定事件
+        load: function () {
+            this.$http.get("http://localhost:8080/blogtags/queryAllTags").then(function (response) {
+                console.log(response)
+                var serverResponse = response.body;
+                var pageInfo = serverResponse.data;
+                this.$data.mytags = pageInfo.list;//将后台返回的数据返回给VUE数据包，数据包会发生改变，并将数据进行渲染
+            }, function (err) {
+
+            })
+        }
+    }
+
+})
+
+
+
+
+
+
+/*格式化日期*/
 function formatDate(date, fmt) {
     if (/(y+)/.test(fmt)) {
         fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));

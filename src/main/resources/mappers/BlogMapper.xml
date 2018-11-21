@@ -92,17 +92,19 @@
 			a.description,
 			a.img,
 			a.user_id,
-			a.tags,
 			a.create_time as createTime,
 			a.is_hot ,
-			c.`name` as categoryName
+			c.`name` as categoryName,
+			d.tag_name as tagName
 		FROM
 			blog a
 			LEFT JOIN blog_users b ON a.user_id = b.id
 			LEFT JOIN blog_category c ON a.category_id = c.id
+			INNER JOIN blog_tags d on a.tags = d.tag_id
 		WHERE a.status = 1 and a.is_delete = 0
 		ORDER BY a.create_time DESC
 	</select>
+
 
 
 </mapper>
