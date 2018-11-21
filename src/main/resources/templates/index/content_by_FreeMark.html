@@ -1,39 +1,60 @@
-<div class="container" id="myContent" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<div class="container">
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container ">
-            <div  class="post-preview" v-for="(blog,index) in blogs" :key="index">
+        <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+
+
+
+            <!--使用freemark模板标签 循环-->
+            <#list pageInfo.data.list as blog >
+            <div class="post-preview">
                 <a href="/article/essay/something-has-to-be-written/">
                     <h2 class="post-title">
-                       {{index + 1}} [{{blog.categoryName}}] {{blog.title}}
+                        <!--序号： ${blog_index + 1}-->
+                        ${blog_index + 1} [${blog.categoryName}] ${blog.title}
                     </h2>
                     <h3 class="post-subtitle">
                     </h3>
                     <div class="post-content-preview">
-                        <!--{{blog.description}}-->
-                        <span v-html ="blog.description"></span>  <!-- v-html  可以让数据库中带有标签的数据正常 显示-->
-                         ​　　
+                        ${blog.description}    ​　　
                     </div>
                 </a>
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by 程程有小棉被啊 on
-                    {{blog.createTime | formatDate("yyyy-MM-dd hh:mm:ss")}} //Vue 日期格式化
+                    ${(blog.createTime)?string("yyyy-MM-dd hh:mm:ss")}
+                    <!--freemark 格式化日期 （日期）？date   ||   (日期)？datetime    ||   (日期)？string("格式化样式")   -->
                 </p>
                 <div class="tags">
-                    <a v-bind:href="'/tags/#'+ blog.categoryName" v-bind:title="blog.categoryName">{{blog.categoryName}}</a>
+                    <a href="/tags/#随笔" title="随笔">${blog.categoryName}</a>
                 </div>
             </div>
+            </#list>
+
+
+
 
             <hr>
-            <!--分页-->
-            <!--使用vue pagination 分页插件-->
-            <div id="myPage">
-                <vue-nav v-bind:cur="pageNum" v-bind:all="pages" v-bind:callback="callback"></vue-nav>
-            </div>
-
+            <ul class="pager">
+                <li class="next">
+                    <a href="/archives/2/">Older Posts →</a>
+                </li>
+            </ul>
+            <br>
             <!-- 如果开启评论功能 -->
         </div>
         <!-- Sidebar Container -->
-        <div class=" col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12 col-xs-12 sidebar-container">
+        <div class="
+        col-lg-3 col-lg-offset-0
+        col-md-3 col-md-offset-0
+        col-sm-12
+        col-xs-12
+        sidebar-container"
+        >
 
             <!-- Featured Tags -->
 

@@ -39,9 +39,10 @@ public class BlogServiceImpl implements IBlogService  {
 
 	@Override
 	public ServerResponse queryBlog(int pageNo, int pageSize) {
+		//注意：使用pageHelper分页插件 顺序不可以写反！！
         PageHelper.startPage(pageNo, pageSize);
-	    List<Map<String, Object>> maps = blogMapper.queryBlog();
-        PageInfo pageInfo = new PageInfo(maps);
+	    List<Map<String, Object>> blogs = blogMapper.queryBlog();
+        PageInfo pageInfo = new PageInfo(blogs);
         return ServerResponse.createBySuccess(pageInfo);
 	}
 

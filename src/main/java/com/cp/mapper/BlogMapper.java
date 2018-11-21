@@ -27,7 +27,7 @@ public interface BlogMapper {
 	public Blog getBlogById(@Param("id")Integer id);
 	//查询所有
 	public List<Blog> queryBlogAll(BlogVo blogVo);
-
+	//查询
 	public List<Map<String,Object>> queryBlog();
 
 

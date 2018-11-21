@@ -6,10 +6,7 @@ import com.cp.vo.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -27,9 +24,12 @@ public class BlogController {
     @Autowired
     private IBlogService blogService;
 
-    @GetMapping("/blog")
-    public String blogindex() {
-        return "blog/index";
+    @GetMapping("/blog/query")
+    @ResponseBody
+    public ServerResponse queryBlog(@RequestParam(value = "pageNo",defaultValue = "1")int pageNo,
+                                    @RequestParam(value = "pageSize",defaultValue = "10")int pageSize) {
+        ServerResponse serverResponse = blogService.queryBlog(pageNo, pageSize);
+        return serverResponse;
     }
 
     /**

@@ -88,14 +88,14 @@
 		SELECT
 			a.id,
 			a.title,
-			a.category_id,
+			a.category_id as categoryId,
 			a.description,
 			a.img,
 			a.user_id,
 			a.tags,
-			a.create_time,
+			a.create_time as createTime,
 			a.is_hot ,
-			c.`name` as category_name
+			c.`name` as categoryName
 		FROM
 			blog a
 			LEFT JOIN blog_users b ON a.user_id = b.id
