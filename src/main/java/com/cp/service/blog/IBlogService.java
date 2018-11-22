@@ -80,7 +80,12 @@ public interface IBlogService {
      */
     public ServerResponse queryBlog(int pageNo,int pageSize);
 
-
+    /**
+     * 根据博客主键查询博客
+     * @param id 主键
+     * @return
+     */
+    public ServerResponse getBlogByPrimaryKey(Integer id);
 
 
 

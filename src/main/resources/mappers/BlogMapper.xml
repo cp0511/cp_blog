@@ -101,10 +101,36 @@
 			LEFT JOIN blog_users b ON a.user_id = b.id
 			LEFT JOIN blog_category c ON a.category_id = c.id
 			INNER JOIN blog_tags d on a.tags = d.tag_id
-		WHERE a.status = 1 and a.is_delete = 0
+		WHERE
+			a.status = 1
+			AND a.is_delete = 0
+			AND d.is_delete = 0
 		ORDER BY a.create_time DESC
 	</select>
-
+	<select id="getBlogByPrimaryKey" resultType="java.util.Map" parameterType="integer">
+		SELECT
+			a.id,
+			a.title,
+			a.category_id AS categoryId,
+			a.description,
+			a.img,
+			a.user_id,
+			a.content,
+			a.create_time AS createTime,
+			a.is_hot ,
+			c.`name` AS categoryName,
+			d.tag_name AS tagName
+		FROM
+			blog a
+			LEFT JOIN blog_users b ON a.user_id = b.id
+			LEFT JOIN blog_category c ON a.category_id = c.id
+			INNER JOIN blog_tags d on a.tags = d.tag_id
+		WHERE
+			a.status = 1
+			AND a.is_delete = 0
+			AND d.is_delete = 0
+			AND a.id = #{id}
+	</select>
 
 
 </mapper>

@@ -4,7 +4,6 @@ import com.cp.service.blog.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * Created by 程程有小棉被啊 on 2018/11/16.
@@ -30,10 +29,10 @@ public class IndexController {
         return "blog/index";
     }
 
-    @GetMapping("/detail/{id}")
-    public String detail(@PathVariable("id") Integer id){
-        return "detail";
-    }
+//    @GetMapping("/detail/{id}")
+//    public String detail(@PathVariable("id") Integer id){
+//        return "blog/blog_detail";
+//    }
 
 
 

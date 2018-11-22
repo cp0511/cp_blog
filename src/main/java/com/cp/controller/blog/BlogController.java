@@ -5,6 +5,7 @@ import com.cp.vo.BlogVo;
 import com.cp.vo.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,12 @@ public class BlogController {
     @Autowired
     private IBlogService blogService;
 
-
+    /**
+     * 查询所有的博客（带分页）
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/blog/query")
     @ResponseBody
     public ServerResponse queryBlog(@RequestParam(value = "pageNo",defaultValue = "1")int pageNo,
@@ -40,15 +46,15 @@ public class BlogController {
      * 手机:132xxxx1385<br/>
      *
      * @param id
-     * @param map
      * @return String<br/>
      * @throws <br/>
      * @since 1.0.0<br/>
      */
-    @GetMapping("/blog/{id}")
-    public String blogdetail(@PathVariable("id") Integer id, ModelMap map) {
-        map.addAttribute("id", id);
-        return "blog/detail";
+    @GetMapping("/blogdetail/{id}")
+    public String blogdetail(@PathVariable("id") Integer id, Model model) {
+        ServerResponse blog = blogService.getBlogByPrimaryKey(id);
+        model.addAttribute("blog",blog.getData());
+        return "blog/blog_detail";
     }
 
 

@@ -1,8 +1,9 @@
 <div class="container" xmlns:v-bind="http://www.w3.org/1999/xhtml">
     <div class="row">
         <div id="myContent" class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container ">
+
             <div  class="post-preview" v-for="(blog,index) in blogs" :key="index">
-                <a href="/article/essay/something-has-to-be-written/">
+                <a target="_blank"  :href="'${bathPath}/blogdetail/'+ blog.id"><!-- a标签中 target属性设置 为  新页面打开 -->
                     <h2 class="post-title">
                        {{index + 1}} [{{blog.categoryName}}] {{blog.title}}
                     </h2>
@@ -16,7 +17,7 @@
                 </a>
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by 程程有小棉被啊 on
-                    {{blog.createTime | formatDate("yyyy-MM-dd hh:mm:ss")}} //Vue 日期格式化
+                    {{blog.createTime | formatDate("yyyy-MM-dd hh:mm:ss")}} <!--Vue 日期格式化-->
                 </p>
                 <div class="tags">
                     <a v-bind:href="'/tags/#'+blog.categoryName" v-bind:title="blog.categoryName">{{blog.categoryName}}</a>

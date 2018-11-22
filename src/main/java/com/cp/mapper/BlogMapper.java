@@ -29,7 +29,8 @@ public interface BlogMapper {
 	public List<Blog> queryBlogAll(BlogVo blogVo);
 	//查询
 	public List<Map<String,Object>> queryBlog();
-
+	//根据 主键查询bolg对象
+	Map<String,Object> getBlogByPrimaryKey(@Param("id") Integer id);
 
 
 

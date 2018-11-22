@@ -47,6 +47,12 @@ public class BlogServiceImpl implements IBlogService  {
 	}
 
 	@Override
+	public ServerResponse getBlogByPrimaryKey(Integer id) {
+		Map<String, Object> blog = blogMapper.getBlogByPrimaryKey(id);
+		return ServerResponse.createBySuccess(blog);
+	}
+
+	@Override
 	public ServerResponse saveBlog(BlogVo blogVo) {
 		Blog blog = new Blog();
 		BeanUtils.copyProperties(blogVo, blog);
